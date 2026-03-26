@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Search Medicines — MedFind{% endblock %}
+{% block content %}
+<section class="search-section">
+    <div class="search-section__header">
+        <h1 class="search-section__title">Search <span class="text-accent">Medicines</span></h1>
+        <p class="search-section__sub">Enter the medicine name to see which pharmacies have it in stock.</p>
+    </div>
+    <form class="search-form" action="{{ url_for('user.results') }}" method="GET" id="searchForm">
+        <div class="search-form__row">
+            <input
+                type="text"
+                name="q"
+                class="form-input search-form__input"
+                placeholder="e.g. Paracetamol, Ibuprofen, Amoxicillin…"
+                value="{{ request.args.get('q', '') }}"
+                id="searchInput"
+                required
+                autofocus
+            >
+            <button type="submit" class="btn btn--primary search-form__btn">
+                <span>Search</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </div>
+        <span class="form-error" id="searchError"></span>
+    </form>
+    <div class="search-suggestions">
+        <span class="suggestions-label">Popular searches:</span>
+        <button type="button" class="suggestion-tag" data-term="Paracetamol">Paracetamol</button>
+        <button type="button" class="suggestion-tag" data-term="Ibuprofen">Ibuprofen</button>
+        <button type="button" class="suggestion-tag" data-term="Amoxicillin">Amoxicillin</button>
+        <button type="button" class="suggestion-tag" data-term="Metformin">Metformin</button>
+        <button type="button" class="suggestion-tag" data-term="Omeprazole">Omeprazole</button>
+    </div>
+    <a href="{{ url_for('user.dashboard') }}" class="back-link">← Back to Dashboard</a>
+</section>
+{% endblock %}
