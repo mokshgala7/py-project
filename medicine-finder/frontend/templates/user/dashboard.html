@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}User Dashboard — MedFind{% endblock %}
+{% block content %}
+<section class="dashboard">
+    <div class="dashboard-header">
+        <div class="dashboard-header__text">
+            <p class="dashboard-header__greeting">Good to see you,</p>
+            <h1 class="dashboard-header__name">{{ current_user.name if current_user else "Guest" }} <span class="wave">👋</span></h1>
+            <p class="dashboard-header__sub">What medicine are you looking for today?</p>
+        </div>
+        <div class="dashboard-header__badge">USER</div>
+    </div>
+    <div class="dashboard-actions">
+        <a href="{{ url_for('user.search') }}" class="action-card action-card--primary">
+            <span class="action-card__icon">🔍</span>
+            <div class="action-card__body">
+                <h2 class="action-card__title">Search Medicines</h2>
+                <p class="action-card__desc">Find which pharmacies have your medicine in stock right now.</p>
+            </div>
+            <span class="action-card__arrow">→</span>
+        </a>
+        <a href="{{ url_for('index') }}" class="action-card">
+            <span class="action-card__icon">🏠</span>
+            <div class="action-card__body">
+                <h2 class="action-card__title">Back to Home</h2>
+                <p class="action-card__desc">Return to the landing page.</p>
+            </div>
+            <span class="action-card__arrow">→</span>
+        </a>
+    </div>
+    <div class="dashboard-tip">
+        <span class="tip-label">💡 Tip</span>
+        <p>Search by the generic name of the medicine for the most accurate results.</p>
+    </div>
+</section>
+{% endblock %}

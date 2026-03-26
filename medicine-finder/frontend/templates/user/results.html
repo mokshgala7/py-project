@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Results for "{{ query }}" — MedFind{% endblock %}
+{% block content %}
+<section class="results-section">
+    <div class="results-header">
+        <a href="{{ url_for('user.search') }}" class="back-link">← New Search</a>
+        <h1 class="results-title">
+            Results for <span class="results-query">"{{ query }}"</span>
+        </h1>
+        <p class="results-count">
+            {% if results %}
+                <span class="count-badge">{{ results|length }}</span> {{ 'pharmacy' if results|length == 1 else 'pharmacies' }} found
+            {% else %}
+                No results found
+            {% endif %}
+        </p>
+    </div>
+    {% if results %}
+    <div class="results-grid">
+        {% for result in results %}
+        <div class="result-card">
+            <div class="result-card__header">
+                <span class="result-card__icon">🏥</span>
+                <div>
+                    <h2 class="result-card__pharmacy">{{ result.pharmacy_name }}</h2>
+                    {% if result.location %}
+                    <p class="result-card__location">📍 {{ result.location }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="result-card__body">
+                <div class="result-card__medicine">
+                    <span class="medicine-label">Medicine</span>
+                    <span class="medicine-name">{{ result.medicine_name }}</span>
+                </div>
+                <div class="result-card__qty {{ 'qty--low' if result.quantity|int < 10 else 'qty--ok' }}">
+                    <span class="qty-label">In Stock</span>
+                    <span class="qty-value">{{ result.quantity }}</span>
+                    <span class="qty-unit">units</span>
+                </div>
+            </div>
+            {% if result.quantity|int < 10 %}
+            <div class="result-card__warning">⚠ Low stock — visit soon</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-results">
+        <span class="no-results__icon">🔍</span>
+        <h2 class="no-results__title">No pharmacies found</h2>
+        <p class="no-results__desc">No pharmacy currently has <strong>{{ query }}</strong> in stock. Try a different name or check back later.</p>
+        <a href="{{ url_for('user.search') }}" class="btn btn--primary">Try Another Search</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
