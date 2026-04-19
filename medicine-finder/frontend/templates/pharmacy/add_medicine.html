@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Add Medicine — MedFind{% endblock %}
+{% block content %}
+<section class="auth-section">
+    <div class="auth-card auth-card--wide">
+        <div class="auth-card__header">
+            <span class="auth-card__icon">➕</span>
+            <h1 class="auth-card__title">Add Medicine</h1>
+            <p class="auth-card__sub">Add a medicine to your pharmacy inventory</p>
+        </div>
+        <form class="auth-form" action="{{ url_for('pharmacy.add_medicine') }}" method="POST" id="addMedicineForm" novalidate>
+            <div class="form-group">
+                <label class="form-label" for="medicine_name">Medicine Name</label>
+                <input
+                    type="text"
+                    id="medicine_name"
+                    name="medicine_name"
+                    class="form-input"
+                    placeholder="e.g. Paracetamol 500mg"
+                    required
+                >
+                <span class="form-error" id="medicineNameError"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="quantity">Quantity Available</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    class="form-input"
+                    placeholder="e.g. 150"
+                    min="0"
+                    required
+                >
+                <span class="form-error" id="quantityError"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="category">Category <span class="label-opt">(optional)</span></label>
+                <select id="category" name="category" class="form-input form-select">
+                    <option value="">Select category</option>
+                    <option value="analgesic">Analgesic / Pain Relief</option>
+                    <option value="antibiotic">Antibiotic</option>
+                    <option value="antiviral">Antiviral</option>
+                    <option value="antifungal">Antifungal</option>
+                    <option value="antidiabetic">Antidiabetic</option>
+                    <option value="cardiovascular">Cardiovascular</option>
+                    <option value="respiratory">Respiratory</option>
+                    <option value="gastrointestinal">Gastrointestinal</option>
+                    <option value="vitamins">Vitamins &amp; Supplements</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn--primary">Add to Inventory</button>
+                <a href="{{ url_for('pharmacy.dashboard') }}" class="btn btn--outline">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

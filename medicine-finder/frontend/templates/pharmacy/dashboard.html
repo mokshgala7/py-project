@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Pharmacy Dashboard — MedFind{% endblock %}
+{% block content %}
+<section class="dashboard">
+    <div class="dashboard-header dashboard-header--pharmacy">
+        <div class="dashboard-header__text">
+            <p class="dashboard-header__greeting">Pharmacy Portal</p>
+            <h1 class="dashboard-header__name">{{ pharmacy.name if pharmacy else "Your Pharmacy" }}</h1>
+            <p class="dashboard-header__sub">Manage your medicine inventory and keep stock up to date.</p>
+        </div>
+        <div class="dashboard-header__badge dashboard-header__badge--pharmacy">PHARMACY</div>
+    </div>
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <span class="stat-card__num">{{ medicine_count if medicine_count is defined else '—' }}</span>
+            <span class="stat-card__label">Medicines Listed</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-card__num">{{ low_stock_count if low_stock_count is defined else '—' }}</span>
+            <span class="stat-card__label">Low Stock Items</span>
+        </div>
+    </div>
+    <div class="dashboard-actions">
+        <a href="{{ url_for('pharmacy.add_medicine') }}" class="action-card action-card--primary">
+            <span class="action-card__icon">➕</span>
+            <div class="action-card__body">
+                <h2 class="action-card__title">Add Medicine</h2>
+                <p class="action-card__desc">List a new medicine and set the available quantity.</p>
+            </div>
+            <span class="action-card__arrow">→</span>
+        </a>
+        <a href="{{ url_for('pharmacy.inventory') }}" class="action-card">
+            <span class="action-card__icon">📋</span>
+            <div class="action-card__body">
+                <h2 class="action-card__title">View Inventory</h2>
+                <p class="action-card__desc">See and update all medicines currently in your stock.</p>
+            </div>
+            <span class="action-card__arrow">→</span>
+        </a>
+    </div>
+</section>
+{% endblock %}
