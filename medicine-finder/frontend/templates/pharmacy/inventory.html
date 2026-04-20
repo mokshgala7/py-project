@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Inventory — MedFind{% endblock %}
+{% block content %}
+<section class="inventory-section">
+    <div class="inventory-header">
+        <div>
+            <h1 class="inventory-title">Inventory</h1>
+            <p class="inventory-sub">All medicines currently listed at your pharmacy</p>
+        </div>
+        <a href="{{ url_for('pharmacy.add_medicine') }}" class="btn btn--primary">+ Add Medicine</a>
+    </div>
+    {% if medicines %}
+    <div class="table-wrapper">
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Medicine Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for med in medicines %}
+                <tr class="{{ 'row--low' if med.quantity < 10 else '' }}">
+                    <td class="td-num">{{ loop.index }}</td>
+                    <td class="td-name">{{ med.name }}</td>
+                    <td class="td-cat">
+                        <span class="category-pill">{{ med.category if med.category else '—' }}</span>
+                    </td>
+                    <td class="td-qty">
+                        <span class="qty-chip {{ 'qty-chip--low' if med.quantity < 10 else 'qty-chip--ok' }}">
+                            {{ med.quantity }}
+                        </span>
+                    </td>
+                    <td class="td-status">
+                        {% if med.quantity == 0 %}
+                            <span class="status-badge status-badge--out">Out of Stock</span>
+                        {% elif med.quantity < 10 %}
+                            <span class="status-badge status-badge--low">Low Stock</span>
+                        {% else %}
+                            <span class="status-badge status-badge--ok">In Stock</span>
+                        {% endif %}
+                    </td>
+                    <td class="td-actions">
+                        <a href="{{ url_for('pharmacy.edit_medicine', id=med.id) }}" class="tbl-btn tbl-btn--edit">Edit</a>
+                        <form action="{{ url_for('pharmacy.delete_medicine', id=med.id) }}" method="POST" class="inline-form" onsubmit="return confirmDelete(event)">
+                            <button type="submit" class="tbl-btn tbl-btn--delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="inventory-summary">
+        <span>Total: <strong>{{ medicines|length }}</strong> item{{ 's' if medicines|length != 1 }}</span>
+        <span>Low stock: <strong>{{ medicines|selectattr('quantity', 'lt', 10)|list|length }}</strong></span>
+    </div>
+    {% else %}
+    <div class="no-results">
+        <span class="no-results__icon">📦</span>
+        <h2 class="no-results__title">No medicines listed yet</h2>
+        <p class="no-results__desc">Start building your inventory by adding your first medicine.</p>
+        <a href="{{ url_for('pharmacy.add_medicine') }}" class="btn btn--primary">Add First Medicine</a>
+    </div>
+    {% endif %}
+    <a href="{{ url_for('pharmacy.dashboard') }}" class="back-link" style="margin-top:2rem;display:inline-block;">← Back to Dashboard</a>
+</section>
+{% endblock %}

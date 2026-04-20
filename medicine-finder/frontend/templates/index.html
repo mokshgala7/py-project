@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}MedFind — Find Medicines Near You{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-tag">Medicine Availability Finder</div>
+    <h1 class="hero-heading">
+        Find the<br>
+        <span class="hero-heading--accent">Medicine</span><br>
+        You Need.
+    </h1>
+    <p class="hero-sub">Search real-time pharmacy stock. Know before you go.</p>
+    <form class="hero-search" action="{{ url_for('user.search') }}" method="GET">
+        <input type="text" name="q" class="hero-search__input" placeholder="Search medicine name…" required>
+        <button type="submit" class="btn btn--primary hero-search__btn">Search</button>
+    </form>
+    <div class="hero-cta">
+        <a href="{{ url_for('auth.register') }}" class="btn btn--outline">Create Account</a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn--ghost">Sign In →</a>
+    </div>
+    <div class="hero-badges">
+        <div class="badge">
+            <span class="badge__icon">🏥</span>
+            <span>Verified Pharmacies</span>
+        </div>
+        <div class="badge">
+            <span class="badge__icon">⚡</span>
+            <span>Live Stock Data</span>
+        </div>
+        <div class="badge">
+            <span class="badge__icon">📍</span>
+            <span>Location-Based Results</span>
+        </div>
+    </div>
+</section>
+<section class="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step__num">01</div>
+            <h3 class="step__title">Search</h3>
+            <p class="step__desc">Enter the medicine name in the search bar.</p>
+        </div>
+        <div class="step__divider">→</div>
+        <div class="step">
+            <div class="step__num">02</div>
+            <h3 class="step__title">Discover</h3>
+            <p class="step__desc">View pharmacies that have it in stock right now.</p>
+        </div>
+        <div class="step__divider">→</div>
+        <div class="step">
+            <div class="step__num">03</div>
+            <h3 class="step__title">Go</h3>
+            <p class="step__desc">Head straight to the pharmacy with confidence.</p>
+        </div>
+    </div>
+</section>
+<section class="portal-cards">
+    <a href="{{ url_for('user.dashboard') }}" class="portal-card portal-card--user">
+        <span class="portal-card__label">User Portal</span>
+        <span class="portal-card__title">Search &amp; Find</span>
+        <span class="portal-card__arrow">→</span>
+    </a>
+    <a href="{{ url_for('pharmacy.dashboard') }}" class="portal-card portal-card--pharmacy">
+        <span class="portal-card__label">Pharmacy Portal</span>
+        <span class="portal-card__title">Manage Inventory</span>
+        <span class="portal-card__arrow">→</span>
+    </a>
+</section>
+{% endblock %}
