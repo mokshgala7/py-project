@@ -23,7 +23,7 @@ Prerequisites: Python 3.8+ must be installed on your machine.
 
 ```bash
 git clone <your-github-repo-link>
-cd py-project-main/medicine-finder
+cd <repo-dir>/medicine-finder
 ```
 
 ### 2. (Optional) Create a Virtual Environment
