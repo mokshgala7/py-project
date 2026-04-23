@@ -54,7 +54,8 @@ python backend/app.py
 
 Visit: http://localhost:5000
 
-The SQLite database (medicine.db) is created automatically on first run. No manual database setup is needed.
+The SQLite database (`medicine.db`) is created automatically on first run. No manual database setup is needed.
+When you start the app with `python backend/app.py` from the repository root, the database file will be created in the current working directory (that is, alongside the project files in the repo root), not inside the `instance/` folder.
 
 Optional: To pre-populate the database with sample data, run:
 
