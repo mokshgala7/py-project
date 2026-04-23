@@ -7,9 +7,9 @@ A web application that helps users locate medicines at nearby pharmacies. Pharma
 Medicine Finder connects two types of users — patients/buyers and pharmacists — on a single platform.
 
 - Pharmacists register with their pharmacy's full address, then manage their medicine inventory by adding, editing, or removing stock.
-- Users register with their location and can search for any medicine by name. The results show a list of pharmacies that carry it, along with available stock and the pharmacy's location.
+- Users can register, sign in, and search for any medicine by name. The results show a list of pharmacies that carry it, along with available stock and the pharmacy's location.
 
-The app supports role-based authentication — each account is either a user or a pharmacy, and the dashboard experience is tailored accordingly. Location is collected at sign-up and sign-in/sign-out are fully supported.
+The app supports role-based authentication — each account is either a user or a pharmacy, and the dashboard experience is tailored accordingly. Pharmacy address information is collected at sign-up, and sign-in/sign-out are fully supported.
 
 Tech Stack: Python, Flask, SQLAlchemy, SQLite, Jinja2, HTML/CSS/JS
 
