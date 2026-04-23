@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Medicine Finder",
+			"type": "shell",
+			"command": "py",
+			"args": [
+				"backend/app.py"
+			],
+			"isBackground": true
+		}
+	]
+}
